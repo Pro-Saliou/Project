@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+		<meta charset="UTF-8">
+		<title>Modifier Utilisateur</title>
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    	<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+   	    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+  		
+  	<!-- fin integration  de la barre des menus -->
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        
+	    <link rel="stylesheet" type="text/css" href="css/Table.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />  		
+</head>
+<body>
+<div class="container">  
+			<!-- Bootstrap Jumbotron -->
+			<div th:include="menubar1"></div>  
+			<br/>
+<div th:switch="${users}">
+    <h2 th:case="null">No users yet!</h2>
+        <div th:case="*">
+            <h2>Users</h2>
+            <table border="1" id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Login</th>
+                        <th>Mot de Passe</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.nom}"></td>
+                    <td th:text="${user.prenom}"></td>
+                    <td th:text="${user.login}"></td>
+                    <td th:text="${user.motdepasse}"></td>
+                    <td><a th:href="@{/edit/{id}(id=${user.id})}">Edit</a></td>
+                    <td><a th:href="@{/delete/{id}(id=${user.id})}">Delete</a></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                     <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Login</th>
+                        <th>Mot de Passe</th>
+                    </tr>
+                </tfoot>
+        </table>
+    </div>
+    <p><a href="/signup">Add a new user</a></p>
+</div>
+</div>
+	<script> 
+	$(document).ready(function() {
+	    // Setup - add a text input to each footer cell
+	    $('#example tfoot th').each( function () {
+	        var title = $(this).text();
+	        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+	    } );
+	 
+	    // DataTable
+	    var table = $('#example').DataTable({
+	        initComplete: function () {
+	            // Apply the search
+	            this.api().columns().every( function () {
+	                var that = this;
+	 
+	                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+	                    if ( that.search() !== this.value ) {
+	                        that
+	                            .search( this.value )
+	                            .draw();
+	                    }
+	                } );
+	            } );
+	        }
+	    });
+	 
+	} );
+  </script>	
+</body>
+</html>

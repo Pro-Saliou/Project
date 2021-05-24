@@ -1,0 +1,8 @@
+@charset "UTF-8";
+/*mise en forme des tfoot*/
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+    /* Fin de mise en forme des tfoot*/

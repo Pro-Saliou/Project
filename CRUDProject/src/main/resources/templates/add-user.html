@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+    	<meta charset="UTF-8"/>
+    	<title>Spring Boot Thymeleaf Application - Bootstrap Input Password</title>
+    	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+	</head>
+	<body>
+	
+	  <div class="container">  
+			<!-- Bootstrap Jumbotron -->
+			<div th:include="menubar1"></div>  
+			<br/>
+		<div align="center"	>
+		<form action="#" th:action="@{/adduser}" th:object="${user}" method="post">
+   			<h1>Ajouter un utilisateur</h1>
+   
+   			<div>
+    			 <label for="nom">Nom</label>
+    			 <input type="text" th:field="*{nom}" id="nom" placeholder="Name">
+   				 <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+  			</div>
+   
+   			<div>
+    			 <label for="prenom">Prénom</label>
+     			 <input type="text" th:field="*{prenom}" id="prenom" placeholder="Prenom">
+   				 <span th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+   			</div>
+    
+   			<div>
+   				 <label for="login">Login</label>
+    			 <input type="text" th:field="*{login}" id="login" placeholder="Login">
+   				 <span th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></span>
+  			</div>
+   
+   			<div>
+    			<label for="motdepasse">Mot de passe</label>
+    			<input type="text" th:field="*{motdepasse}" id="motdepasse" placeholder="motdepasse">
+   				 <span th:if="${#fields.hasErrors('motdepasse')}" th:errors="*{motdepasse}"></span>
+  			</div>
+   
+   			<input type="submit" value="Add User">
+		</form>
+		</div>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+	</div>  
+		
+	</body>
+</html>

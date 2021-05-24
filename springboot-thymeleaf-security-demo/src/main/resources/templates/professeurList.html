@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	<head>
+	
+		<meta charset="utf-8"/>
+		<title>Product Manager</title>
+		
+		
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    	<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+   	    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+  		
+  	<!-- fin integration  de la barre des menus -->
+		<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+            <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        
+	    <link rel="stylesheet" type="text/css" href="css/Table.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+        
+    
+	</head>
+<body>
+ <div class="container">  
+			<!-- Bootstrap Jumbotron -->
+			<div th:include="menubar1"></div>  
+			<br/>
+
+<div align="center">
+    <h1>Room List</h1>
+    <a href="/formProf">Ajouter un Nouveau professeur</a>
+    <br/><br/>
+    <table border="1" id="example" class="display" style="width:80%">
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Filiere</th>
+                <th>Titre</th>
+                <th>Ancienneté</th>    
+                <th>Modifier</th>
+                <th>Supprimer</th>          
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="professeur : ${professeurs}">
+                <td th:text="${professeur.matricule}">Matricule</td>
+                <td th:text="${professeur.nom}">Nom</td>
+                <td th:text="${professeur.prenom}">Prenom</td>
+                <td th:text="${professeur.telephone}">Telephone</td>
+                <td th:text="${professeur.filiere}">Filiere</td>
+                <td th:text="${professeur.titre}">Niveau</td>
+                <td th:text="${professeur.anciennete}">Ancienneté</td>   
+                <td><a th:href="@{/editProfesseur/{id}(id=${professeur.id})}">Edit</a></td>
+                <td><a th:href="@{/deleteProfesseur/{id}(id=${professeur.id})}">Delete</a></td>     
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Filiere</th>
+                <th>Titre</th>
+                <th>Ancienneté</th>    
+                <th>Modifier</th>
+                <th>Supprimer</th>          
+            </tr>
+        </tfoot>
+    </table>
+</div> 
+ </div>
+ <script> 
+	$(document).ready(function() {
+	    // Setup - add a text input to each footer cell
+	    $('#example tfoot th').each( function () {
+	        var title = $(this).text();
+	        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+	    } );
+	 
+	    // DataTable
+	    var table = $('#example').DataTable({
+	        initComplete: function () {
+	            // Apply the search
+	            this.api().columns().every( function () {
+	                var that = this;
+	 
+	                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+	                    if ( that.search() !== this.value ) {
+	                        that
+	                            .search( this.value )
+	                            .draw();
+	                    }
+	                } );
+	            } );
+	        }
+	    });
+	 
+	} );
+  </script>
+		
+</body>
+</html>

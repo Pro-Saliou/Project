@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+ <head>
+ 
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+   	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+  		
+  	<!-- fin integration  de la barre des menus -->
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        
+	<link rel="stylesheet" type="text/css" href="css/Table.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
+  		
+	
+ </head>
+ 
+ <body>
+ <div class="container">  
+			<!-- Bootstrap Jumbotron -->
+			<div th:include="menubar1"></div>  
+			<br/>
+  <div align="center">
+  	<h1>Room List</h1>
+  	<a href="/addsalle">Create New Room</a>
+  </div>
+  <br/>
+  <table  border="1"  id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Filiere</th>
+                <th>Niveau</th>
+                <th>Groupe</th>    
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="etudiant : ${Etudiants}">
+                <td th:text="${etudiant.matricule}">Matricule</td>
+                <td th:text="${etudiant.nom}">Nom</td>
+                <td th:text="${etudiant.prenom}">Prenom</td>
+                <td th:text="${etudiant.telephone}">Telephone</td>
+                <td th:text="${etudiant.filiere}">Filiere </td>
+                <td th:text="${etudiant.niveau}">Niveau</td>
+                <td th:text="${etudiant.groupe}">Groupe</td>   
+                <td><a th:href="@{/editEtudiant/{id}(id=${etudiant.id})}">Edit</a></td>
+                <td><a th:href="@{/deleteEtudiant/{id}(id=${etudiant.id})}">Delete</a></td>     
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Matricule</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Telephone</th>
+                <th>Filiere</th>
+                <th>Niveau</th>
+                <th>Groupe</th>    
+                <th>Modifier</th>
+                <th>Supprimer</th>
+            </tr>
+        </tfoot>
+    </table>
+    </div>
+   <script> 
+	$(document).ready(function() {
+	    // Setup - add a text input to each footer cell
+	    $('#example tfoot th').each( function () {
+	        var title = $(this).text();
+	        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+	    } );
+	 
+	    // DataTable
+	    var table = $('#example').DataTable({
+	        initComplete: function () {
+	            // Apply the search
+	            this.api().columns().every( function () {
+	                var that = this;
+	 
+	                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+	                    if ( that.search() !== this.value ) {
+	                        that
+	                            .search( this.value )
+	                            .draw();
+	                    }
+	                } );
+	            } );
+	        }
+	    });
+	 
+	} );
+  </script>
+  		
+  
+</body>
+ </html>

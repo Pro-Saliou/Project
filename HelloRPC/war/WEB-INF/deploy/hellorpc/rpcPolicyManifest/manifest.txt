@@ -1,0 +1,3 @@
+# Module hellorpc
+# RPC service class, partial path of RPC policy file
+com.test.client.MessageService, 9C7CB3234E179D8F6EEFAC4180A175B4.gwt.rpc

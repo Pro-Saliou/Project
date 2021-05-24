@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+		<meta charset="utf-8" />
+		<title>Afficher un nouveau Professeur</title>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+</head>
+<body>
+<div class="container">  
+			<!-- Bootstrap Jumbotron -->
+			<div th:include="menubar1"></div>  
+			<br/>
+    <div align="center">
+        <h1>Saisir un nouveau Professeur</h1>
+        <br />
+        <form action="#" th:action="@{/updateProfesseur/{id}(id=${professeur.id})}" th:object="${professeur}"
+            method="post">
+ 
+            <table>
+            <tr>             
+                    <td>Etudiant ID:</td>
+                    <td>
+                        <input type="text" th:field="*{id}" readonly="readonly" />
+                    </td>
+                </tr> 
+                <tr>
+                    <td>Nom:</td>
+                    <td><input type="text" th:field="*{nom}" /></td>
+                </tr>
+                <tr>
+                    <td>Prenom:</td>
+                    <td><input type="text" th:field="*{prenom}" /></td>
+                </tr>
+                <tr>
+                    <td>Date de Naissance:</td>
+                    <td><input type="date" th:field="*{dateNaissiance}" /></td>
+                </tr>
+                <tr>
+                    <td>Lieu de Naissance:</td>
+                    <td><input type="text" th:field="*{lieuNaissance}" /></td>
+                </tr>   
+                <tr>
+                    <td>Filiere:</td>
+                    <td><input type="text" th:field="*{filiere}" /></td>
+                </tr>     
+                 <tr>
+                    <td>Telephone:</td>
+                    <td><input type="text" th:field="*{telephone}" /></td>
+                </tr> 
+                 <tr>
+                    <td>Nationalité:</td>
+                    <td><input type="text" th:field="*{nationalité}" /></td>
+                </tr>      
+                   
+                <tr>
+                    <td>Titre:</td>
+                    <td><input type="text" th:field="*{titre}" /></td>
+                </tr>    
+                <tr>
+                    <td>Ancienneté:</td>
+                    <td><input type="text" th:field="*{anciennete}" /></td>
+                </tr>
+                <tr>
+                    <td>Matricule:</td>
+                    <td><input type="text" th:field="*{matricule}" /></td>
+                </tr>          
+                <tr>
+                    <td colspan="2"><button type="submit">Save</button> </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
+    </div>
+</body>
+</html>

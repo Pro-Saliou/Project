@@ -1,0 +1,2 @@
+serviceClass: com.test.client.MessageService
+path: 9C7CB3234E179D8F6EEFAC4180A175B4.gwt.rpc
